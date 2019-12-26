@@ -18,10 +18,10 @@ class IntroPage extends StatelessWidget {
   final pages = [
     PageViewModel(
         pageColor: const Color(0xFF03A9F4),
-        bubble: Image.asset('assets/icopostres.png'),
+        bubble: Image.asset('assets/inic2.png'),
         body: Text(
 //          'Welcome  to  intro  slider  in  flutter  with  package  intro  views  flutter  latest  update',
-          'Tu app para preparar los mejores postres',style: TextStyle(fontSize: 30),
+          'Sistema de Monitoreo de Transporte Escolar',style: TextStyle(fontSize: 30),
         ),
         title: Text(
           '',
@@ -29,40 +29,40 @@ class IntroPage extends StatelessWidget {
         ),
         //textStyle: TextStyle(fontFamily: 'Rubik-Light', color: Colors.white),
         mainImage: Image.asset(
-          'assets/icopostres.png',
+         'assets/inic2.png',
           height: 285.0,
-          width: 285.0,
+          width: double.infinity,
           alignment: Alignment.center,
         )),
     PageViewModel(
       pageColor: const Color(0xFF8BC34A),
-      iconImageAssetPath: 'assets/INTRO2.png',
+      iconImageAssetPath: 'assets/inic3.png',
       bodyTextStyle: TextStyle(fontSize: 5),
       body: Text(
 //        'Amazevalley  intoduce  you  with  the  latest  features  coming  in  flutter  with  practical  demos',
-        'Video tutoriales, información de recetas y cronómetro de ayuda',style: TextStyle(fontSize: 30),
+        'Información en tiempo real de la ruta',style: TextStyle(fontSize: 30),
       ),
       title: Text(''),
       mainImage: Image.asset(
-        'assets/INTRO2.png',
+        'assets/inic3.png',
         height: 285.0,
-        width: 285.0,
+        width: double.infinity,
         alignment: Alignment.center,
       ),
       //textStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
     ),
     PageViewModel(
       pageColor: const Color(0xFFFF8020),
-      iconImageAssetPath: 'assets/INTRO3.png',
+      iconImageAssetPath: 'assets/inic1.png',
       body: Text(
 //        'Amazevalley  give  you  brief  soluton  about  technology  where  you  fall  in  love',
-        'Es importante que cuentes con conexión internet',style: TextStyle(fontSize: 30),
+        'Representantes siempre informados',style: TextStyle(fontSize: 30),
       ),
       title: Text(''),
       mainImage: Image.asset(
-        'assets/INTRO3.png',
+        'assets/inic1.png',
         height: 285.0,
-        width: 285.0,
+        width: double.infinity,
         alignment: Alignment.center,
       ),
       //textStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),

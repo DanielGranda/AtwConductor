@@ -36,11 +36,12 @@ class FormCard extends StatelessWidget {
             ),
             Text("Usuario",
                 style: TextStyle(
-                    color: Colors.greenAccent,
+                    color: Colors.green,
                     fontFamily: "Poppins-Medium",
                     fontWeight: FontWeight.bold,
                     fontSize: 14.0)),
             TextField(
+              style: TextStyle(color: Colors.blueGrey),
               decoration: InputDecoration(
                   hintText: "Ingrese su usuario",
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 10.0)),
@@ -50,12 +51,13 @@ class FormCard extends StatelessWidget {
             ),
             Text("Contraseña",
                 style: TextStyle(
-                  color: Colors.greenAccent,
+                  color: Colors.green,
                   fontWeight: FontWeight.bold,
                   fontSize: 14.0,
                   fontFamily: "Poppins-Medium",
                 )),
             TextField(
+              style: TextStyle(color: Colors.blueGrey),
               obscureText: true,
               decoration: InputDecoration(
                   hintText: "Ingrese su contraseña",

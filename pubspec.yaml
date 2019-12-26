@@ -30,11 +30,25 @@ dependencies:
   splashscreen: ^1.2.0
   intro_views_flutter: ^2.8.0
   flare_flutter: ^1.6.4
+  sliding_up_panel:
+  sliding_sheet: 
+  charts_flutter: ^0.8.1
+  font_awesome_flutter: ^8.5.0
+  material_design_icons_flutter: ^3.2.4096
+  
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  flutter_launcher_icons:
+
+flutter_icons:
+  android: "launcher_icon" 
+  ios: true
+  image_path: "assets/LogoATGSN.png"
+  adaptive_icon_background: "assets/LogoATGSN.png"
 
 
 # For information on the generic Dart part of this file, see the

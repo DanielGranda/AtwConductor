@@ -1,6 +1,8 @@
+import 'package:antawaschool/pages/homePage/util/HomePage.dart';
 import 'package:antawaschool/pages/loginPageUi/socialIcons.dart';
 import 'package:antawaschool/utils/screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import '../homePageMonitor.dart';
 import 'customIcos.dart';
 import 'form.dart';
@@ -63,7 +65,7 @@ class _LoginAtwState extends State<LoginAtw> {
                     colorFilter: ColorFilter.mode(
                         Colors.black.withOpacity(0.6), BlendMode.dstOut),
                     image:
-                        AssetImage("assets/vehiculoAtg.png"),
+                        AssetImage("assets/VEHICULO.png"),
                     fit: BoxFit.contain,
                   )),
             //child: 
@@ -147,7 +149,8 @@ class _LoginAtwState extends State<LoginAtw> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => HomePageMonitor(),
+                                    //builder: (context) => HomePageMonitor(),
+                                    builder: (context) => HomePage(),
                                   ), //MaterialPageRoute
                                 );
                               },
@@ -196,7 +199,8 @@ class _LoginAtwState extends State<LoginAtw> {
                           Color(0xFF187adf),
                           Color(0xFF00eaf8),
                         ],
-                        iconData: CustomIcons.facebook,
+
+                        iconData: FontAwesome.facebook_f,
                         onPressed: () {},
                       ),
                       SocialIcon(
@@ -204,7 +208,7 @@ class _LoginAtwState extends State<LoginAtw> {
                           Color(0xFFff4f38),
                           Color(0xFFff355d),
                         ],
-                        iconData: CustomIcons.googlePlus,
+                        iconData: FontAwesome.google,
                         onPressed: () {},
                       ),
                       SocialIcon(
@@ -212,7 +216,7 @@ class _LoginAtwState extends State<LoginAtw> {
                           Color(0xFF17ead9),
                           Color(0xFF6078ea),
                         ],
-                        iconData: CustomIcons.twitter,
+                        iconData: FontAwesome.linkedin,
                         onPressed: () {},
                       ),
                       SocialIcon(
@@ -220,7 +224,7 @@ class _LoginAtwState extends State<LoginAtw> {
                           Color(0xFF00c6fb),
                           Color(0xFF005bea),
                         ],
-                        iconData: CustomIcons.linkedin,
+                        iconData: FontAwesome.whatsapp,
                         onPressed: () {},
                       )
                     ],

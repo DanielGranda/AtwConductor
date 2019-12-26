@@ -1,3 +1,4 @@
+import 'package:antawaschool/pages/homePage/util/HomePage.dart';
 import 'package:antawaschool/pages/intrPageView.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -20,7 +21,9 @@ class _MyAppState extends State<MyApp> {
     return new SplashScreen(
       imageBackground: AssetImage('assets/SPASH_SCREEN_2.gif'),
       seconds: 8,
-      navigateAfterSeconds: new IntroPage(),
+      navigateAfterSeconds: 
+      //HomePage(),
+      new IntroPage(),
       title: new Text(
         '',
         style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
