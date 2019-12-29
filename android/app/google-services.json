@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "220217192583",
+    "firebase_url": "https://reproductormusic-74d27.firebaseio.com",
+    "project_id": "reproductormusic-74d27",
+    "storage_bucket": "reproductormusic-74d27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220217192583:android:495b0df3cd97095fef0822",
+        "android_client_info": {
+          "package_name": "com.pressUpApp.AntawaSchool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220217192583-88nf27u900g3m314or3htl9q22d5jf9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKrN8ToOmmt9g2gk0vA8UZ9CsgZIWTPic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220217192583-88nf27u900g3m314or3htl9q22d5jf9j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "220217192583-kd9lifd9pe8jg5bsh0717hi1tsc1kutn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.danielgranda.reproductorpressupapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

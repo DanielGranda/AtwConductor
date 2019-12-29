@@ -5,10 +5,10 @@ class FormCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      width: double.infinity,
+      //width: double.infinity,
       //height: ScreenUtil.getInstance().setHeight(500),
       decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.7),
+          color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
             BoxShadow(
@@ -41,7 +41,8 @@ class FormCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 14.0)),
             TextField(
-              style: TextStyle(color: Colors.blueGrey),
+              autofocus: false,
+              style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                   hintText: "Ingrese su usuario",
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 10.0)),
@@ -57,7 +58,7 @@ class FormCard extends StatelessWidget {
                   fontFamily: "Poppins-Medium",
                 )),
             TextField(
-              style: TextStyle(color: Colors.blueGrey),
+              style: TextStyle(color: Colors.white),
               obscureText: true,
               decoration: InputDecoration(
                   hintText: "Ingrese su contraseña",

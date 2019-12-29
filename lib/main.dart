@@ -1,12 +1,47 @@
-import 'package:antawaschool/pages/homePage/util/HomePage.dart';
-import 'package:antawaschool/pages/intrPageView.dart';
+import 'package:antawaschool/services/pushNotification/push_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
+import 'pages/MapsPage/HomePageMaps.dart';
+import 'pages/MapsPage/MapsPagePrueba.dart';
+import 'pages/homePage/util/permitionGpsUI.dart';
+import 'pages/introPage/introPageP.dart';
+import 'pages/loginPageUi/loginAtg.dart';
+
+import 'package:flutter/material.dart';
+
+/* void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Material App',
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        'home': (_) => HomePageMaps(),
+        'permition': (_) => PermitionGpsUi(),
+        'map': (_) => MapsPrueba(),
+        'login': (_) => LoginAtw(),
+        'intro2': (_) => IntroScreen(),
+        '/': (_) => MyApp(),
+      },
+    );
+  }
+} */
 
 void main() {
   runApp(new MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: new MyApp(),
+    //home: new MyApp(),
+    initialRoute: '/',
+    routes: {
+      'permition': (_) => PermitionGpsUi(),
+      'map': (_) => MapsPrueba(),
+      'login': (_) => LoginAtw(),
+      'intro2': (_) => IntroScreen(),
+      '/': (_) => MyApp(),
+    },
   ));
 }
 
@@ -17,44 +52,24 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+
+    final pushProvider = new PushNotificationProvider();
+    pushProvider.initNotificatiom();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new SplashScreen(
       imageBackground: AssetImage('assets/SPASH_SCREEN_2.gif'),
-      seconds: 8,
-      navigateAfterSeconds: 
-      //HomePage(),
-      new IntroPage(),
-      title: new Text(
-        '',
-        style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-      ),
-      //image: Image.asset('assets/SPASH_SCREEN_2.gif'),
-      /* Image.network('https://flutter.io/images/catalog-widget-placeholder.png'), */
-
-      //backgroundGradient: new LinearGradient(colors: [Colors.cyan, Colors.blue], begin: Alignment.topLeft, end: Alignment.bottomRight),
+      seconds: 7, //Teimpo de animación
+      navigateAfterSeconds: LoginAtw(),
       backgroundColor: Colors.white,
       styleTextUnderTheLoader: new TextStyle(),
       photoSize: 100.0,
-      onClick: () => print("Flutter Egypt"),
+      onClick: () => print(""),
       loaderColor: Colors.white.withOpacity(0.2),
-    );
-  }
-}
-
-class AfterSplash extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Welcome In SplashScreen Package"),
-        automaticallyImplyLeading: false,
-      ),
-      body: new Center(
-        child: new Text(
-          "Succeeded!",
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
-        ),
-      ),
     );
   }
 }

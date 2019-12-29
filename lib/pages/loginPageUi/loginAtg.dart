@@ -1,10 +1,8 @@
-import 'package:antawaschool/pages/homePage/util/HomePage.dart';
+import 'package:antawaschool/pages/introPage/introPageP.dart';
 import 'package:antawaschool/pages/loginPageUi/socialIcons.dart';
 import 'package:antawaschool/utils/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import '../homePageMonitor.dart';
-import 'customIcos.dart';
 import 'form.dart';
 
 class LoginAtw extends StatefulWidget {
@@ -51,21 +49,23 @@ class _LoginAtwState extends State<LoginAtw> {
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
-        ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
+    ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return new Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black12,
       resizeToAvoidBottomPadding: true,
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
           Container(
+            width: double.infinity,
+            height: double.infinity,
             padding: EdgeInsets.only(top: 10.0),
            decoration: BoxDecoration(
                       image: DecorationImage(
                     colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(0.6), BlendMode.dstOut),
+                        Colors.black.withOpacity(0.2), BlendMode.colorBurn),
                     image:
-                        AssetImage("assets/VEHICULO.png"),
+                        AssetImage("assets/backGround/backGroundAtw.png"),
                     fit: BoxFit.contain,
                   )),
             //child: 
@@ -74,7 +74,7 @@ class _LoginAtwState extends State<LoginAtw> {
           /* Expanded(
             child: SizedBox(height: 0,),
           ), */
-          Image.asset("assets/image2.png"),
+          //Image.asset("assets/image2.png"),
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 40.0),
@@ -89,7 +89,7 @@ class _LoginAtwState extends State<LoginAtw> {
                       ),
                       Text("ANTAWA SCHOOL",
                           style: TextStyle(
-                              color: Colors.blueGrey,
+                              color: Colors.white,
                               fontFamily: "Poppins-Bold",
                               fontSize: ScreenUtil.getInstance().setSp(46),
                               letterSpacing: .6,
@@ -146,11 +146,11 @@ class _LoginAtwState extends State<LoginAtw> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                     //builder: (context) => HomePageMonitor(),
-                                    builder: (context) => HomePage(),
+                                    builder: (context) => IntroScreen(),
                                   ), //MaterialPageRoute
                                 );
                               },
@@ -180,7 +180,7 @@ class _LoginAtwState extends State<LoginAtw> {
                       horizontalLine(),
                       Text("Social Login",
                           style: TextStyle(
-                              color: Colors.blueGrey,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 16.0,
                               fontFamily: "Poppins-Medium")),
