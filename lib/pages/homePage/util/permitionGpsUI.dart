@@ -40,7 +40,7 @@ class _PermitionGpsUiState extends State<PermitionGpsUi>
     final status = await _permissionHandler
         .checkPermissionStatus(PermissionGroup.locationWhenInUse);
     if (status == PermissionStatus.granted) {
-      Navigator.pushReplacementNamed(context, 'map');
+      Navigator.pushReplacementNamed(context, 'mapAttw');
     } else {
       setState(() {
         _isChecking = false;
@@ -54,7 +54,7 @@ class _PermitionGpsUiState extends State<PermitionGpsUi>
     if (result.containsKey(PermissionGroup.locationWhenInUse)) {
       final status = result[PermissionGroup.locationWhenInUse];
       if (status == PermissionStatus.granted) {
-        Navigator.pushReplacementNamed(context, 'map');
+        Navigator.pushReplacementNamed(context, 'mapAttw');
       } else if (status == PermissionStatus.denied) {
         final result = await _permissionHandler.openAppSettings();
         print('result $result');
@@ -93,8 +93,8 @@ class _PermitionGpsUiState extends State<PermitionGpsUi>
                     ),
                     InkWell(
                       child: Container(
-                        width: ScreenUtil.getInstance().setWidth(330),
-                        height: ScreenUtil.getInstance().setHeight(100),
+                        width: 150,
+                        height: 60,
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
                                 colors: [Color(0xFF17ead9), Color(0xFF6078ea)]),

@@ -183,6 +183,7 @@ class _MapsPruebaState extends State<MapsPrueba> {
       child: GoogleMap(
         initialCameraPosition: _kGooglePlex,
         myLocationButtonEnabled: true,
+        
         myLocationEnabled: true,
         markers: Set.of(_markers.values),
         polylines: Set.of(_polylines.values),

@@ -23,7 +23,6 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  extended_navbar_scaffold: ^1.0.1
   flutter_vector_icons: ^0.2.0
   responsive_scaffold: ^1.1.1
   kf_drawer: ^1.1.2
@@ -36,15 +35,30 @@ dependencies:
   material_design_icons_flutter: ^3.2.4096
 #Intro
   flutter_page_indicator: ^0.0.3
+  transformer_page_view: ^0.1.6
 #Librerias Firebase
+  firebase_core: ^0.4.3+1
+  firebase_auth: ^0.15.3
   firebase_messaging: ^6.0.9
   cloud_firestore: ^0.13.0+1
   # Manejo de Maps
   google_maps_flutter: ^0.5.21+15
   permission_handler: ^4.0.0
   geolocator: ^5.1.5
-
-
+# Registro
+  flutter_form_builder: ^3.7.2
+  expandable: ^4.0.2
+  date_format: ^1.0.8
+# Manejo de estados
+  provider: ^4.0.1
+# Google
+  google_sign_in: ^4.1.1
+# Preferencias de usuario
+  shared_preferences: ^0.5.6
+#Diseño y fotografia
+  awesome_dialog: ^0.1.0
+  bubble_tab_indicator: ^0.1.4
+  image_picker: ^0.6.2+3
   
 
 
@@ -79,6 +93,7 @@ flutter:
     - assets/icon/
     - assets/backGround/
     - assets/introImg/
+    - assets/imgEps/
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   

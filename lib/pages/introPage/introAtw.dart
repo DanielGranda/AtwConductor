@@ -1,13 +1,24 @@
 import 'package:antawaschool/pages/homePage/util/permitionGpsUI.dart';
-import 'package:antawaschool/utils/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
+import 'package:transformer_page_view/transformer_page_view.dart';
 
-class IntroScreen extends StatefulWidget {
-  IntroScreen({Key key}) : super(key: key);
+class IntroPageAtw extends StatefulWidget {
+  IntroPageAtw({
+    Key key,
+  }) : super(key: key);
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _IntroPageAtwState createState() => new _IntroPageAtwState();
 }
 
 class RadioGroup extends StatefulWidget {
@@ -56,8 +67,8 @@ class _RadioGroupState extends State<RadioGroup> {
   }
 }
 
-class _MyHomePageState extends State<IntroScreen> {
-  int _index = 1;
+class _IntroPageAtwState extends State<IntroPageAtw> {
+  //int _index = 1;
 
   double size = 20.0;
   double activeSize = 30.0;
@@ -77,7 +88,7 @@ class _MyHomePageState extends State<IntroScreen> {
   }
 
   @override
-  void didUpdateWidget(IntroScreen oldWidget) {
+  void didUpdateWidget(IntroPageAtw oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 
@@ -146,8 +157,8 @@ class _MyHomePageState extends State<IntroScreen> {
                   Expanded(child: SizedBox()),
                   InkWell(
                     child: Container(
-                      width: ScreenUtil.getInstance().setWidth(330),
-                      height: ScreenUtil.getInstance().setHeight(100),
+                      width: 150,
+                      height: 60,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
                               colors: [Color(0xFF17ead9), Color(0xFF6078ea)]),
@@ -192,16 +203,21 @@ class _MyHomePageState extends State<IntroScreen> {
         ],
       ),
     ];
-    return Scaffold(
+    return new Scaffold(
         body: new Column(
       children: <Widget>[
-        new Expanded(
+        Expanded(
             child: new Stack(
           children: <Widget>[
-            PageView(
-              controller: controller,
-              children: children,
-            ),
+            loop
+                ? new TransformerPageView.children(
+                    children: children,
+                    pageController: controller,
+                  )
+                : new PageView(
+                    controller: controller,
+                    children: children,
+                  ),
             new Align(
               alignment: Alignment.bottomCenter,
               child: new Padding(
@@ -212,14 +228,13 @@ class _MyHomePageState extends State<IntroScreen> {
                   activeSize: activeSize,
                   controller: controller,
                   space: 8.0,
-                  color: Colors.orangeAccent,
                   count: 4,
                   dropHeight: 25,
                 ),
               ),
             )
           ],
-        )),
+        ))
       ],
     ));
   }

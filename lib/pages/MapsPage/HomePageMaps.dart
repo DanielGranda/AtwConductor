@@ -1,18 +1,24 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 
+import 'package:antawaschool/estatesApp/socialLoginState.dart';
+import 'package:antawaschool/utils/hexaColor.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 import 'package:flutter/material.dart' as prefix0;
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:antawaschool/pages/homePage/util/utilHome.dart';
+import "dart:ui" as ui;
 
 import 'utilsPageMaps/stylesMaps.dart';
 import 'package:geolocator/geolocator.dart';
+import 'dart:math' as math;
 
 class HomePageMaps extends StatefulWidget {
   HomePageMaps({Key key}) : super(key: key);
@@ -22,10 +28,20 @@ class HomePageMaps extends StatefulWidget {
 }
 
 class _HomePageMapsState extends State<HomePageMaps> {
+  GoogleMapController _mapController;
+  Uint8List _carPin;
+  Marker _myMarker;
+
   final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
+
+  StreamSubscription<Position> _positionStream;
+  Map<MarkerId, Marker> _markers = Map();
+  Map<PolylineId, Polyline> _polylines = Map();
+  List<LatLng> _myRoute = List();
+  Position _lastPosition;
 
   SheetController controller;
   GlobalKey headerKey;
@@ -49,6 +65,7 @@ class _HomePageMapsState extends State<HomePageMaps> {
   @override
   void initState() {
     super.initState();
+    _loadCarPin();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 
     headerKey = GlobalKey();
@@ -64,37 +81,143 @@ class _HomePageMapsState extends State<HomePageMaps> {
         setState(() {});
       }
     });
-
-    _startTracking();
   }
 
-    StreamSubscription<Position> _positionStream;
+  _loadCarPin() async {
+    final byteData = await rootBundle.load('assets/icon/busAtw.png');
+    _carPin = byteData.buffer.asUint8List();
 
+    final codec = await ui.instantiateImageCodec(_carPin, targetWidth: 80);
+    final ui.FrameInfo frameInfo = await codec.getNextFrame();
+    _carPin = (await frameInfo.image.toByteData(format: ui.ImageByteFormat.png))
+        .buffer
+        .asUint8List();
+    _startTracking();
+  }
 
   _startTracking() {
     final geolocator = Geolocator();
     final locationOptions =
-        LocationOptions(accuracy: LocationAccuracy.high, distanceFilter: 3);
+        LocationOptions(accuracy: LocationAccuracy.high, distanceFilter: 5);
 
-    _positionStream  = geolocator
-        .getPositionStream(locationOptions)
-        .listen(_onpositionUpdate);
+    _positionStream =
+        geolocator.getPositionStream(locationOptions).listen(_onLocationUpdate);
   }
 
-  _onpositionUpdate(Position position){
-       if (position!=null) {
-            print("position${position.latitude}, ${position.longitude}");
-          }
+  _onLocationUpdate(Position position) {
+    if (position != null) {
+      final myPosition = LatLng(position.latitude, position.longitude);
+      _myRoute.add(myPosition);
+
+      final myPolyline = Polyline(
+          polylineId: PolylineId("me"),
+          points: _myRoute,
+          color: Colors.cyanAccent,
+          width: 8);
+
+      if (_myMarker == null) {
+        final markerId = MarkerId("me");
+        final bitmap = BitmapDescriptor.fromBytes(_carPin);
+        _myMarker = Marker(
+            markerId: markerId,
+            position: myPosition,
+            icon: bitmap,
+            rotation: 0,
+            anchor: Offset(0.5, 0.5));
+      } else {
+        final rotation = _getMyBearing(_lastPosition, position);
+        _myMarker = _myMarker.copyWith(
+            positionParam: myPosition, rotationParam: rotation);
+      }
+
+      setState(() {
+        _markers[_myMarker.markerId] = _myMarker;
+        _polylines[myPolyline.polylineId] = myPolyline;
+      });
+      _lastPosition = position;
+      _moveMarkerMap(position);
+    }
   }
 
+  /* Rotador de Pin */
+  double _getMyBearing(Position lastPosition, Position currentPosition) {
+    final dx = math.cos(math.pi / 180 * lastPosition.latitude) *
+        (currentPosition.longitude - lastPosition.longitude);
+    final dy = currentPosition.latitude - lastPosition.latitude;
+    final angle = math.atan2(dy, dx);
+    return 90 - angle * 180 / math.pi;
+  }
 
   @override
   void dispose() {
-    if (_positionStream!=null) {
+    if (_positionStream != null) {
       _positionStream.cancel();
       _positionStream = null;
     }
     super.dispose();
+  }
+
+  _moveMarkerMap(Position position) {
+    final cameraUpdate =
+        CameraUpdate.newLatLng(LatLng(position.latitude, position.longitude));
+    _mapController.animateCamera(cameraUpdate);
+  }
+
+  _updateMarkerPosition(MarkerId markerId, LatLng p) {
+    print("newPosition");
+    _markers[markerId] = _markers[markerId].copyWith(positionParam: p);
+  }
+
+  _onTapMArker(LatLng p) {
+    final id = "${_markers.length}";
+    final marketId = MarkerId(id);
+    final infoWindow = InfoWindow(
+        title: "Estudiante: $id", snippet: "${p.latitude}, ${p.longitude}");
+    final marker = Marker(
+        markerId: marketId,
+        position: p,
+        infoWindow: infoWindow,
+        anchor: Offset(0.5, 1),
+        onTap: () {
+          callEstudents();
+          print("clicked info$id");
+        });
+    setState(() {
+      _markers[marketId] = marker;
+    });
+    print("p:${p.latitude}, ${p.longitude} ");
+  }
+
+  Future callEstudents() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Estudiante:'),
+            content: Text(''),
+            actions: <Widget>[
+              Row(
+                children: <Widget>[
+                  CircleAvatar(
+                    child: Icon(Icons.perm_contact_calendar),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Text('Daniel Granda'),
+                  IconButton(
+                    icon: Icon(Icons.call),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.message),
+                    onPressed: () {},
+                  )
+                ],
+              ),
+            ],
+          );
+        });
   }
 
   @override
@@ -102,21 +225,8 @@ class _HomePageMapsState extends State<HomePageMaps> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Container(
-            width: double.infinity,
-            height: 500,
-            child: GoogleMap(
-              initialCameraPosition: _kGooglePlex,
-              myLocationButtonEnabled: true,
-              myLocationEnabled: true,
-              onMapCreated: (GoogleMapController controller) {
-                controller
-                    .setMapStyle(jsonEncode(mapStyle1)); /* Escoger 1-2-3 */
-              },
-            ),
-          ),
           //buildMap(),
-          SafeArea(
+          /*    SafeArea(
             child: StreamBuilder(
               stream: Firestore.instance.collection('tareas').snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -138,31 +248,57 @@ class _HomePageMapsState extends State<HomePageMaps> {
                 );
               },
             ),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                  0, MediaQuery.of(context).padding.top + 16, 16, 0),
-              child: FloatingActionButton(
-                child: Icon(
-                  FontAwesome.ellipsis_v,
-                  color: mapsBlue,
-                ),
-                backgroundColor: Colors.white,
-                onPressed: () {
-                  showBottomSheet(context);
-                },
-              ),
-            ),
-          ),
-          buildSheet(),
+          ), */
+
+          SafeArea(child: mapa()),
+          botonOpciones(context),
+          cajaInferior(),
         ],
       ),
     );
   }
 
-  void showBottomSheet(BuildContext context) {
+  Container mapa() {
+    return Container(
+      width: double.infinity,
+      height: 500,
+      child: GoogleMap(
+        initialCameraPosition: _kGooglePlex,
+        myLocationButtonEnabled: true,
+        myLocationEnabled: true,
+        markers: Set.of(_markers.values),
+        polylines: Set.of(_polylines.values),
+        onTap: _onTapMArker,
+        onMapCreated: (GoogleMapController controller) {
+          _mapController = controller;
+          _mapController.setMapStyle(jsonEncode(mapStyle1)); /* Escoger 1-2-3 */
+        },
+      ),
+    );
+  }
+
+  Align botonOpciones(BuildContext context) {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+            0, MediaQuery.of(context).padding.top + 5, 19, 0),
+        child: FloatingActionButton(
+          mini: true,
+          child: Icon(
+            FontAwesome.ellipsis_v,
+            color: Colors.black38,
+          ),
+          backgroundColor: Colors.white.withOpacity(0.7),
+          onPressed: () {
+            contenidoOpciones(context);
+          },
+        ),
+      ),
+    );
+  }
+
+  void contenidoOpciones(BuildContext context) {
     showSlidingBottomSheet(
       context,
       snapSpec: const SnapSpec(
@@ -177,29 +313,51 @@ class _HomePageMapsState extends State<HomePageMaps> {
             child: Material(
               child: Column(
                 children: <Widget>[
-                  prefix0.ListTile(
+                  ListTile(
                     leading: Icon(FontAwesome.address_card),
-                    title: prefix0.Text('Perfil de usuario'),
+                    title: Text('Perfil de usuario'),
+                    onTap: (){
+                            Navigator.pushNamed(context,  'registroMonitor');
+                    },
                   ),
-                  prefix0.Divider(),
-                  prefix0.ListTile(
+                  Divider(),
+                      ListTile(
+                    leading: Icon(FontAwesome.cog, color:Color(hexColor('#61B4E5'))),
+                    title: Text('Configuración del Servicio'),
+                    onTap: (){
+                      Navigator.pushNamed(context,  'servicesMonitor');
+                    },
+                  ),
+                  Divider(),
+                  ListTile(
                       leading: Icon(FontAwesome.bell),
-                      title: prefix0.Text('Notificaciones'),
-                      trailing: prefix0.CircleAvatar(
+                      title: Text('Notificaciones'),
+                      trailing: CircleAvatar(
                         backgroundColor: Colors.red,
-                        child: prefix0.Text('2'),
+                        child: Text('2'),
                       )),
-                  prefix0.Divider(),
-                  prefix0.ListTile(
+                  Divider(),
+                  ListTile(
                     leading: Icon(FontAwesome.clipboard),
-                    title: prefix0.Text('Novedades en el trayecto'),
+                    title: Text('Novedades en el trayecto'),
                   ),
-                  prefix0.Divider(),
-                  prefix0.ListTile(
+                  Divider(),
+                  ListTile(
                     leading: Icon(FontAwesome.headphones),
-                    title: prefix0.Text('Gestión de Quejas'),
+                    title: Text('Gestión de Quejas'),
                   ),
-                  prefix0.Divider()
+                  Divider(),
+                      ListTile(
+            trailing: Icon(
+              Icons.power_settings_new,
+              color: Colors.redAccent.withOpacity(0.4),
+            ),
+            title: Text( 'Cerrar Sesión', style: TextStyle(color: Colors.grey)),
+            onTap: () {
+              Provider.of<LoginState>(context, listen: false).logout();
+              Navigator.pushReplacementNamed(context, 'registre');
+            },
+          ),
                 ],
               ),
             )
@@ -215,12 +373,13 @@ class _HomePageMapsState extends State<HomePageMaps> {
     );
   }
 
-  Widget buildSheet() {
+  Widget cajaInferior() {
     return LayoutBuilder(
       builder: (context, constraints) {
         final height = constraints.biggest.height;
 
         return SlidingSheet(
+          closeOnBackdropTap: true,
           controller: controller,
           color: Colors.white,
           elevation: 16,
@@ -235,11 +394,11 @@ class _HomePageMapsState extends State<HomePageMaps> {
             positioning: SnapPositioning.pixelOffset,
             snappings: [
               headerHeight > 0 ? headerHeight + footerHeight : 140,
-              height * 0.7,
+              height * 0.3,
               double.infinity,
             ],
             onSnap: (state, snap) {
-              print('Snapped to $snap');
+              //print('Snapped to $snap');
             },
           ),
           scrollSpec: ScrollSpec.bouncingScroll(),

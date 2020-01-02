@@ -1,49 +1,56 @@
+import 'package:antawaschool/estatesApp/socialLoginState.dart';
+import 'package:antawaschool/pages/introPage/introAtw.dart';
+import 'package:antawaschool/prueba.dart';
 import 'package:antawaschool/services/pushNotification/push_notification.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'pages/MapsPage/HomePageMaps.dart';
 import 'pages/MapsPage/MapsPagePrueba.dart';
+import 'pages/RegistrePageAppUi/registreAtg.dart';
 import 'pages/homePage/util/permitionGpsUI.dart';
-import 'pages/introPage/introPageP.dart';
 import 'pages/loginPageUi/loginAtg.dart';
 
-import 'package:flutter/material.dart';
-
-/* void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Material App',
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      routes: {
-        'home': (_) => HomePageMaps(),
-        'permition': (_) => PermitionGpsUi(),
-        'map': (_) => MapsPrueba(),
-        'login': (_) => LoginAtw(),
-        'intro2': (_) => IntroScreen(),
-        '/': (_) => MyApp(),
-      },
-    );
-  }
-} */
+import 'pages/monitorServices/monitorServices.dart';
+import 'pages/registroEPS/registroEPS.dart';
+import 'pages/registroEPS/registroMonitor.dart';
 
 void main() {
-  runApp(new MaterialApp(
-    debugShowCheckedModeBanner: false,
-    //home: new MyApp(),
-    initialRoute: '/',
-    routes: {
-      'permition': (_) => PermitionGpsUi(),
-      'map': (_) => MapsPrueba(),
-      'login': (_) => LoginAtw(),
-      'intro2': (_) => IntroScreen(),
-      '/': (_) => MyApp(),
-    },
+  runApp(ChangeNotifierProvider<LoginState>(
+    create: (BuildContext context) => LoginState(),
+    child: new MaterialApp(
+      debugShowCheckedModeBanner: false,
+      //home: new MyApp(),
+     initialRoute: 'splash',
+      routes: {
+        'registre': (BuildContext context) {
+        var state =Provider.of<LoginState>(context);
+        if (state.isloggedIn()) {
+        return IntroPageAtw();
+        } else {
+        return RegistreAtw();
+        }
+        },
+        'permition': (_) => PermitionGpsUi(),
+        'registroEps': (_) => ResgistroEps(),
+        'registroMonitor': (_) => ResgistroMonitor(),
+        'map': (_) => MapsPrueba(),
+        'login': (_) => LoginAtw(),
+        'splash': (_) => MyApp(),
+        'prueba': (_) => Prueba(),
+        'intro': (_) => IntroPageAtw(),
+        'mapAttw': (_) => HomePageMaps(),
+        'servicesMonitor': (_) => MonitorServices(),
+      },
+    ),
   ));
 }
+
+
+
+
+
+
 
 class MyApp extends StatefulWidget {
   @override
@@ -64,7 +71,7 @@ class _MyAppState extends State<MyApp> {
     return new SplashScreen(
       imageBackground: AssetImage('assets/SPASH_SCREEN_2.gif'),
       seconds: 7, //Teimpo de animación
-      navigateAfterSeconds: LoginAtw(),
+      navigateAfterSeconds: RegistreAtw(),
       backgroundColor: Colors.white,
       styleTextUnderTheLoader: new TextStyle(),
       photoSize: 100.0,

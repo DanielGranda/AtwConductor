@@ -1,4 +1,4 @@
-import 'package:antawaschool/pages/introPage/introPageP.dart';
+import 'package:antawaschool/pages/introPage/introAtw.dart';
 import 'package:antawaschool/pages/loginPageUi/socialIcons.dart';
 import 'package:antawaschool/utils/screen.dart';
 import 'package:flutter/material.dart';
@@ -150,7 +150,7 @@ class _LoginAtwState extends State<LoginAtw> {
                                   context,
                                   MaterialPageRoute(
                                     //builder: (context) => HomePageMonitor(),
-                                    builder: (context) => IntroScreen(),
+                                    builder: (context) => IntroPageAtw(),
                                   ), //MaterialPageRoute
                                 );
                               },
