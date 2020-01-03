@@ -316,16 +316,17 @@ class _HomePageMapsState extends State<HomePageMaps> {
                   ListTile(
                     leading: Icon(FontAwesome.address_card),
                     title: Text('Perfil de usuario'),
-                    onTap: (){
-                            Navigator.pushNamed(context,  'registroMonitor');
+                    onTap: () {
+                      Navigator.pushNamed(context, 'registroMonitor');
                     },
                   ),
                   Divider(),
-                      ListTile(
-                    leading: Icon(FontAwesome.cog, color:Color(hexColor('#61B4E5'))),
+                  ListTile(
+                    leading: Icon(FontAwesome.cog,
+                        color: Color(hexColor('#61B4E5'))),
                     title: Text('Configuración del Servicio'),
-                    onTap: (){
-                      Navigator.pushNamed(context,  'servicesMonitor');
+                    onTap: () {
+                      Navigator.pushNamed(context, 'servicesMonitor');
                     },
                   ),
                   Divider(),
@@ -347,17 +348,23 @@ class _HomePageMapsState extends State<HomePageMaps> {
                     title: Text('Gestión de Quejas'),
                   ),
                   Divider(),
-                      ListTile(
-            trailing: Icon(
-              Icons.power_settings_new,
-              color: Colors.redAccent.withOpacity(0.4),
-            ),
-            title: Text( 'Cerrar Sesión', style: TextStyle(color: Colors.grey)),
-            onTap: () {
-              Provider.of<LoginState>(context, listen: false).logout();
-              Navigator.pushReplacementNamed(context, 'registre');
-            },
-          ),
+                  ListTile(
+                    leading: Icon(FontAwesome.headphones),
+                    title: Text('Objetos Perdidos'),
+                  ),
+                  Divider(),
+                  ListTile(
+                    trailing: Icon(
+                      Icons.power_settings_new,
+                      color: Colors.redAccent.withOpacity(0.4),
+                    ),
+                    title: Text('Cerrar Sesión',
+                        style: TextStyle(color: Colors.grey)),
+                    onTap: () {
+                      Provider.of<LoginState>(context, listen: false).logout();
+                      Navigator.pushReplacementNamed(context, 'registre');
+                    },
+                  ),
                 ],
               ),
             )

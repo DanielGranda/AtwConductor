@@ -1,5 +1,7 @@
 import 'package:antawaschool/estatesApp/socialLoginState.dart';
 import 'package:antawaschool/pages/introPage/introAtw.dart';
+import 'package:antawaschool/pages/monitorServices/conductorPagePrincipal.dart';
+import 'package:antawaschool/pages/registroEPS/registroConductor.dart';
 import 'package:antawaschool/prueba.dart';
 import 'package:antawaschool/services/pushNotification/push_notification.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +23,7 @@ void main() {
     child: new MaterialApp(
       debugShowCheckedModeBanner: false,
       //home: new MyApp(),
-     initialRoute: 'splash',
+     initialRoute: 'servicesMonitor',
       routes: {
         'registre': (BuildContext context) {
         var state =Provider.of<LoginState>(context);
@@ -34,6 +36,8 @@ void main() {
         'permition': (_) => PermitionGpsUi(),
         'registroEps': (_) => ResgistroEps(),
         'registroMonitor': (_) => ResgistroMonitor(),
+        'registroConductor': (_) => ResgistroConductor(),
+        'principalConductor': (_) => PrincipalPageConductor(),
         'map': (_) => MapsPrueba(),
         'login': (_) => LoginAtw(),
         'splash': (_) => MyApp(),

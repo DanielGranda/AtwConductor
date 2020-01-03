@@ -1,103 +1,23 @@
 import 'package:antawaschool/estatesApp/socialLoginState.dart';
-import 'package:antawaschool/pages/registroEPS/registroConductor.dart';
 import 'package:antawaschool/utils/hexaColor.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 
-import 'conductorPagePrincipal.dart';
 
-class MonitorServices extends StatefulWidget {
-  MonitorServices({Key key}) : super(key: key);
+class PrincipalPageConductor extends StatefulWidget {
+  PrincipalPageConductor({Key key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return new HomeWidgetState();
-  }
+  _PrincipalPageConductorState createState() => _PrincipalPageConductorState();
 }
 
-class HomeWidgetState extends State<MonitorServices>
-    with SingleTickerProviderStateMixin {
-  final List<Tab> tabs = <Tab>[
-    new Tab(text: "Registro de Monitores"),
-    new Tab(text: "Registro Conductores"),
-    new Tab(text: "Registro de Vehículos"),
-    new Tab(text: "Vinculación a Vehículos"),
-    new Tab(text: "Vinculación a Empresa")
-  ];
-
-  TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = new TabController(vsync: this, length: tabs.length);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
+class _PrincipalPageConductorState extends State<PrincipalPageConductor> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        leading: IconButton(
-          icon: Icon(
-            FontAwesome.chevron_circle_left,
-            color: Color(hexColor('#61B4E5')),
-            size: 30,
-          ),
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, 'mapAttw');
-          },
-        ),
-        backgroundColor: Colors.white,
-        title: Text('Configuración del Servicio'.toUpperCase(),
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Color(hexColor('#5CC4B8')),
-            )),
-        bottom: new TabBar(
-          isScrollable: true,
-          unselectedLabelColor: Colors.grey,
-          labelColor: Colors.white,
-          indicatorSize: TabBarIndicatorSize.tab,
-          indicator: new BubbleTabIndicator(
-            indicatorHeight: 25.0,
-            indicatorColor: Color(hexColor('#F6C34F')),
-            tabBarIndicatorSize: TabBarIndicatorSize.tab,
-          ),
-          tabs: tabs,
-          controller: _tabController,
-        ),
-      ),
-      body: new TabBarView(controller: _tabController, children: <Widget>[
-        RegistreMonitores(),
-        PrincipalPageConductor(),
-        Text(''),
-        Text(''),
-        Text(''),
-      ]),
-    );
-  }
-}
-
-class RegistreMonitores extends StatelessWidget {
-  const RegistreMonitores({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var user = Provider.of<LoginState>(context, listen: false).currentUser();
-    return Scaffold(
+     var user = Provider.of<LoginState>(context, listen: false).currentUser();
+    return  Scaffold(
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -115,7 +35,7 @@ class RegistreMonitores extends StatelessWidget {
           ),
           StreamBuilder(
             stream: Firestore.instance.collection('user').document(user.uid)
-                                  .collection('registroMonitorEps').snapshots(),
+                                  .collection('registroConductor').snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -210,7 +130,7 @@ class RegistreMonitores extends StatelessWidget {
         backgroundColor: Color(hexColor('#3A4A64')),
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.pushNamed(context, 'registroMonitor');
+          Navigator.pushNamed(context, 'registroConductor');
         },
       ),
     );
