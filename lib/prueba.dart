@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'estatesApp/socialLoginState.dart';
 
 class Prueba extends StatelessWidget {
    @override
@@ -10,7 +7,7 @@ class Prueba extends StatelessWidget {
       body: Center(
         child: FlatButton(child: Text('Hola'),
          onPressed: () {
-           Provider.of<LoginState>(context, listen: false).login();
+           //Provider.of<LoginState>(context, listen: false).login();
          },
 
         )

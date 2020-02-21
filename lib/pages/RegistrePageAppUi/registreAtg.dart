@@ -46,101 +46,7 @@ class _RegistreAtwState extends State<RegistreAtw> {
                     SizedBox(
                       height: 20,
                     ),
-                    Column(
-                      children: <Widget>[
-                        Text("Social Login",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0,
-                                fontFamily: "Poppins-Medium")),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Container(
-                                  color: Color(hexColor('#3A4A64'))
-                                      .withOpacity(0.5),
-                                  height: 2,
-                                  width: 60,
-                                ),
-                                Text("Social Login",
-                                    style: TextStyle(
-                                        color: colorField,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16.0,
-                                        fontFamily: "Poppins-Medium")),
-                                Container(
-                                  color: Color(hexColor('#3A4A64'))
-                                      .withOpacity(0.5),
-                                  height: 2,
-                                  width: 60,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            /*      SocialIcon(
-                            colors: [
-                              Color(0xFF102397),
-                              Color(0xFF187adf),
-                              Color(0xFF00eaf8),
-                            ],
-                            iconData: FontAwesome.facebook_f,
-                            onPressed: () {},
-                          ), */
-                            Consumer<LoginState>(
-                              builder: (BuildContext context, LoginState value,
-                                  Widget child) {
-                                if (value.isloading()) {
-                                  return CircularProgressIndicator();
-                                } else {
-                                  return child;
-                                }
-                              },
-                              child: SocialIcon(
-                                colors: [
-                                  Color(0xFFff4f38),
-                                  Color(0xFFff355d),
-                                ],
-                                iconData: FontAwesome.google,
-                                onPressed: () {
-                                  Provider.of<LoginState>(context,
-                                          listen: false)
-                                      .login();
-                                },
-                              ),
-                            ),
-                            /*  SocialIcon(
-                            colors: [
-                              Color(0xFF17ead9),
-                              Color(0xFF6078ea),
-                            ],
-                            iconData: FontAwesome.linkedin,
-                            onPressed: () {},
-                          ),
-                          SocialIcon(
-                            colors: [
-                              Color(0xFF00c6fb),
-                              Color(0xFF005bea),
-                            ],
-                            iconData: FontAwesome.whatsapp,
-                            onPressed: () {},
-                          ) */
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    ),
+                    //socialLogin(),
                     //redesSocialesRegistre(),
                     footerregistre(),
                     SizedBox(
@@ -154,6 +60,104 @@ class _RegistreAtwState extends State<RegistreAtw> {
         ],
       ),
     );
+  }
+
+  Column socialLogin() {
+    return Column(
+                    children: <Widget>[
+                      Text("Social Login",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                              fontFamily: "Poppins-Medium")),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                color: Color(hexColor('#3A4A64'))
+                                    .withOpacity(0.5),
+                                height: 2,
+                                width: 60,
+                              ),
+                              Text("Social Login",
+                                  style: TextStyle(
+                                      color: colorField,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.0,
+                                      fontFamily: "Poppins-Medium")),
+                              Container(
+                                color: Color(hexColor('#3A4A64'))
+                                    .withOpacity(0.5),
+                                height: 2,
+                                width: 60,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          /*      SocialIcon(
+                          colors: [
+                            Color(0xFF102397),
+                            Color(0xFF187adf),
+                            Color(0xFF00eaf8),
+                          ],
+                          iconData: FontAwesome.facebook_f,
+                          onPressed: () {},
+                        ), */
+                          Consumer<LoginState>(
+                            builder: (BuildContext context, LoginState value,
+                                Widget child) {
+                              if (value.isloading()) {
+                                return CircularProgressIndicator();
+                              } else {
+                                return child;
+                              }
+                            },
+                            child: SocialIcon(
+                              colors: [
+                                Color(0xFFff4f38),
+                                Color(0xFFff355d),
+                              ],
+                              iconData: FontAwesome.google,
+                              onPressed: () {
+                                /* Provider.of<LoginState>(context,
+                                        listen: false)
+                                    .login(); */
+                              },
+                            ),
+                          ),
+                          /*  SocialIcon(
+                          colors: [
+                            Color(0xFF17ead9),
+                            Color(0xFF6078ea),
+                          ],
+                          iconData: FontAwesome.linkedin,
+                          onPressed: () {},
+                        ),
+                        SocialIcon(
+                          colors: [
+                            Color(0xFF00c6fb),
+                            Color(0xFF005bea),
+                          ],
+                          iconData: FontAwesome.whatsapp,
+                          onPressed: () {},
+                        ) */
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  );
   }
 
   Widget botonRegistre() {
@@ -273,7 +277,7 @@ class _RegistreAtwState extends State<RegistreAtw> {
               ],
               iconData: FontAwesome.google,
               onPressed: () {
-                Provider.of<LoginState>(context, listen: false).login();
+                //Provider.of<LoginState>(context, listen: false).login();
               },
             ),
             /*  SocialIcon(
@@ -387,17 +391,29 @@ class _RegistreAtwState extends State<RegistreAtw> {
           Row(
             children: <Widget>[
               Image.asset(
-                "assets/LogoATGSN.png",
-                width: 40,
-                height: 40,
+                "assets/icon/logoConductor.png",
+                width: 60,
+                height: 60,
               ),
-              Text("ANTAWA SCHOOL",
-                  style: TextStyle(
-                      fontSize: 22,
-                      color: Color(hexColor('#5CC4B8')),
-                      fontFamily: "Poppins-Bold",
-                      letterSpacing: .6,
-                      fontWeight: FontWeight.bold)),
+                  SizedBox(width: 10),
+              Column(
+                children: <Widget>[
+                  Text("ANTAWA SCHOOL",
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Color(hexColor('#5CC4B8')),
+                          fontFamily: "Poppins-Bold",
+                          letterSpacing: .6,
+                          fontWeight: FontWeight.bold)),
+                           Text("Conductor",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Color(hexColor('#5CC4B8')),
+                          fontFamily: "Poppins-Bold",
+                          letterSpacing: .6,
+                          fontWeight: FontWeight.bold)),
+                ],
+              ),
             ],
           ),
           SizedBox(

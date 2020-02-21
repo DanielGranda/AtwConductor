@@ -1,41 +1,137 @@
 {
   "project_info": {
-    "project_number": "220217192583",
-    "firebase_url": "https://reproductormusic-74d27.firebaseio.com",
-    "project_id": "reproductormusic-74d27",
-    "storage_bucket": "reproductormusic-74d27.appspot.com"
+    "project_number": "124760226642",
+    "firebase_url": "https://antawaschool-977ae.firebaseio.com",
+    "project_id": "antawaschool-977ae",
+    "storage_bucket": "antawaschool-977ae.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:220217192583:android:495b0df3cd97095fef0822",
+        "mobilesdk_app_id": "1:124760226642:android:04f1a527701dbfb4db588b",
         "android_client_info": {
-          "package_name": "com.pressUpApp.AntawaSchool"
+          "package_name": "com.antawaschool.administrador"
         }
       },
       "oauth_client": [
         {
-          "client_id": "220217192583-88nf27u900g3m314or3htl9q22d5jf9j.apps.googleusercontent.com",
+          "client_id": "124760226642-kngqr1i6513luli1pcogmkpk1m8q14ak.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.antawaschool.administrador",
+            "certificate_hash": "3138a4c145d0baddfde2ef6eeceb341e6156b3af"
+          }
+        },
+        {
+          "client_id": "124760226642-4divbkfeublsa2ab7kvji5426ptl02sn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAKrN8ToOmmt9g2gk0vA8UZ9CsgZIWTPic"
+          "current_key": "AIzaSyA4hkOVCjTa_5meNp-7FGcNMfSe5-bdMpk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "220217192583-88nf27u900g3m314or3htl9q22d5jf9j.apps.googleusercontent.com",
+              "client_id": "124760226642-4divbkfeublsa2ab7kvji5426ptl02sn.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "220217192583-kd9lifd9pe8jg5bsh0717hi1tsc1kutn.apps.googleusercontent.com",
+              "client_id": "124760226642-acnuumqkfqbjeuhi22cm2j2akhtkvpnm.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.danielgranda.reproductorpressupapp"
+                "bundle_id": "com.antawaschool.padres"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124760226642:android:06ccf11ac6dab261db588b",
+        "android_client_info": {
+          "package_name": "com.antawaschool.padres"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124760226642-9dpmgl7clqcdjvm1e78ir29k9mvn3jmr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.antawaschool.padres",
+            "certificate_hash": "3138a4c145d0baddfde2ef6eeceb341e6156b3af"
+          }
+        },
+        {
+          "client_id": "124760226642-4divbkfeublsa2ab7kvji5426ptl02sn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4hkOVCjTa_5meNp-7FGcNMfSe5-bdMpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124760226642-4divbkfeublsa2ab7kvji5426ptl02sn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "124760226642-acnuumqkfqbjeuhi22cm2j2akhtkvpnm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.antawaschool.padres"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124760226642:android:18b7f0ad7eada579db588b",
+        "android_client_info": {
+          "package_name": "com.pressUpApp.AntawaSchool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124760226642-r0ti5j1b7o6to7uq1t9avgvujrjk83e3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pressUpApp.AntawaSchool",
+            "certificate_hash": "3138a4c145d0baddfde2ef6eeceb341e6156b3af"
+          }
+        },
+        {
+          "client_id": "124760226642-4divbkfeublsa2ab7kvji5426ptl02sn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4hkOVCjTa_5meNp-7FGcNMfSe5-bdMpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124760226642-4divbkfeublsa2ab7kvji5426ptl02sn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "124760226642-acnuumqkfqbjeuhi22cm2j2akhtkvpnm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.antawaschool.padres"
               }
             }
           ]
