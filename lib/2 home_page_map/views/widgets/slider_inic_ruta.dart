@@ -178,7 +178,7 @@ class _SliderButtonRutaInicState extends State<SliderButtonRutaInic> {
         }
       },
       label: Text(
-        "INICIAR TRAYECTO",
+        "INICIAR TRAYECTO AHORA",
         style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Color(
